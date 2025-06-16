@@ -1,0 +1,715 @@
+:root {
+  --bg-color: #fce4ec; /* Pastel Pink */
+  --primary-color: #f60d8d; /* Lighter Pink */
+  --secondary-color: #d1c4e9; /* Pastel Lavender */
+  --accent-color: #b3e5fc; /* Pastel Blue */
+  --text-color: #4e342e; /* Dark Brown */
+  --glow-color: #fffde7; /* Creamy Glow */
+  --font-main: "Kalam", cursive;
+  --font-cute: "Gochi Hand", cursive;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- Corner Labubu Images --- */
+.corner-labubu {
+  position: fixed;
+  width: 100px;
+  height: auto;
+  z-index: 0;
+}
+
+#labubu-top-left {
+  top: 10px;
+  left: 10px;
+  rotate: 25deg;
+}
+
+#labubu-top-right {
+  top: 10px;
+  right: 10px;
+  opacity: 0.3; /* Background effect */
+  rotate: -20deg;
+}
+
+#labubu-bottom-right {
+  bottom: 10px;
+  right: 10px;
+  rotate: 25deg;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 1;
+}
+
+/* --- Envelope --- */
+#envelope-container {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+  animation: float 4s ease-in-out infinite;
+}
+
+#envelope-container:hover {
+  transform: scale(1.1);
+}
+
+.envelope {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  background-color: #fff9e6; /* Cream paper color */
+  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png"); /* Paper texture */
+  border: 1px solid #d3c9a5; /* Slight border for realism */
+  border-radius: 5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin: auto;
+}
+
+
+.envelope::before {
+  content: "💌";
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  font-size: 50px;
+  z-index: 0;
+  rotate: -40deg;
+}
+
+.envelope::after {
+  content: "🌸";
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  font-size: 50px;
+  z-index: 0;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: deeppink;
+  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  transform-origin: top;
+  transition: transform 0.5s ease-in-out;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  border-bottom: 1px solid #d3c9a5;
+  z-index: 2;
+}
+
+#envelope-container.open .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope-body {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background-color: #fff9e6;
+  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/* --- Sparkle Effect for Envelope --- */
+.sparkle-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--glow-color);
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  animation: sparkle-dot 2s infinite;
+}
+
+#envelope-container .sparkle-dot:nth-child(1) {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+#envelope-container .sparkle-dot:nth-child(2) {
+  top: 20%;
+  right: 15%;
+  animation-delay: 0.5s;
+}
+#envelope-container .sparkle-dot:nth-child(3) {
+  bottom: 15%;
+  left: 20%;
+  animation-delay: 1s;
+}
+#envelope-container .sparkle-dot:nth-child(4) {
+  bottom: 10%;
+  right: 10%;
+  animation-delay: 1.5s;
+}
+
+@keyframes sparkle-dot {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/* --- Stamps and Ticket --- */
+.labubu-stamp {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  background-image: url("https://www.labubuindia.in/cdn/shop/files/1747485008_Untitled_design_33_6d23c3eb8d_webp.png?v=1748125010&width=533");
+  background-size: cover;
+  border: 2px solid #ff80ab;
+  transform: rotate(5deg);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.heart-stamp {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: #ff80ab;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transform: rotate(-5deg);
+  z-index: 1;
+}
+
+.ticket {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 80px;
+  height: 30px;
+  background-color: var(--accent-color);
+  border: 1px dashed #4e342e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-family: var(--font-cute);
+  color: var(--text-color);
+  transform: rotate(-10deg);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.heart-seal {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  font-size: 25px;
+  color: #ff80ab;
+  animation: pulse 1.5s infinite;
+  z-index: 3;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* --- Letter --- */
+#letter-container {
+  display: none;
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  animation: slide-out 0.8s ease-out forwards;
+  border: 3px solid transparent;
+  background-image: linear-gradient(white, white),
+    radial-gradient(circle at 0 0, var(--primary-color), var(--secondary-color));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+#letter-container::before {
+  content: "💌";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 50px;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+#letter-container::after {
+  content: "🌸";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 50px;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+#letter-content {
+  white-space: pre-wrap;
+  text-align: left;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  min-height: 200px;
+  position: relative;
+  z-index: 1;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.2rem;
+  background-color: var(--text-color);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateY(50px) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- Video Grid Section --- */
+#video-section {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  animation: fade-in 1s forwards;
+}
+
+#video-heading {
+  font-family: var(--font-cute);
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+#video-container {
+  width: 800px;
+  display: flex;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  height: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.labubu-video {
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all ease 0.5s;
+}
+
+.labubu-video:hover {
+    z-index: 99;
+    scale: 1.4;
+}
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* --- Surprise Message and Button --- */
+#surprise-section {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  animation: fade-in 1s forwards;
+}
+
+#surprise-message {
+  font-family: var(--font-cute);
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+#reveal-surprise-btn {
+  background: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: var(--font-cute);
+  font-size: 1.2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#reveal-surprise-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Labubu Toy Section --- */
+#labubu-toy-section {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+}
+
+#end-message-top {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-cute);
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+  font-size: 2rem;
+  text-align: center;
+  z-index: 11;
+}
+
+#labubu-toy-container {
+  position: relative;
+  animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  border: 4px solid transparent;
+  background-image: linear-gradient(white, white),
+    radial-gradient(circle at 0 0, var(--primary-color), var(--secondary-color));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(255, 193, 227, 0.5),
+    0 0 40px rgba(209, 196, 233, 0.3);
+  display: inline-block;
+  z-index: 10;
+  top: 30%;
+  scale: 1.4;
+}
+
+#labubu-toy {
+  max-width: 300px;
+  height: auto;
+  border-radius: 15px;
+}
+
+#labubu-toy-container::before,
+#labubu-toy-container::after {
+  content: "✨";
+  position: absolute;
+  font-size: 30px;
+  opacity: 0.7;
+  animation: sparkle-dot 2s infinite;
+}
+
+#labubu-toy-container::before {
+  top: 10px;
+  left: 10px;
+  animation-delay: 0s;
+}
+
+#labubu-toy-container::after {
+  bottom: 10px;
+  right: 10px;
+  animation-delay: 1s;
+}
+
+#end-message-bottom {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-cute);
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+  font-size: 1.5rem;
+  max-width: 80%;
+  text-align: center;
+  z-index: 11;
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- Background Decorations for Toy Reveal --- */
+.bg-decoration {
+  display: none;
+  position: fixed;
+  font-size: 40px;
+  opacity: 0.5;
+  z-index: 9;
+  animation: float 3s ease-in-out infinite;
+}
+
+#labubu-toy-section .bg-decoration {
+  display: block;
+}
+
+#bg-bow {
+  top: 20px;
+  left: 20px;
+  content: "🎀";
+}
+#bg-flower {
+  top: 20px;
+  right: 20px;
+  content: "🌸";
+}
+#bg-star {
+  bottom: 20px;
+  left: 20px;
+  content: "✨";
+}
+#bg-heart {
+  bottom: 20px;
+  right: 20px;
+  content: "💖";
+}
+
+/* --- Confetti --- */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000;
+  animation: confetti-fall 2s forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* --- Mobile Adjustments --- */
+@media (max-width: 640px) {
+  .envelope {
+    width: 220px;
+    height: 140px;
+  }
+  .envelope-body {
+    top: 70px;
+    height: 70px;
+  }
+  .envelope-flap {
+    height: 80px;
+  }
+  .labubu-stamp {
+    width: 40px;
+    height: 40px;
+    top: 5px;
+    right: 5px;
+  }
+  .heart-stamp {
+    width: 30px;
+    height: 30px;
+    bottom: 5px;
+    left: 5px;
+  }
+  .ticket {
+    width: 60px;
+    height: 25px;
+    font-size: 0.7rem;
+    bottom: 5px;
+    right: 5px;
+  }
+  #letter-container {
+    padding: 20px;
+  }
+  #letter-content {
+    font-size: 1rem;
+  }
+  #letter-container::before,
+  #letter-container::after {
+    font-size: 40px;
+  }
+  #video-heading {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  #video-container {
+    width: 300px;
+    height: 300px;
+  }
+  #surprise-message {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  #reveal-surprise-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  #end-message-top {
+    font-size: 1.5rem;
+    top: 10px;
+  }
+  #end-message-bottom {
+    font-size: 1rem;
+    bottom: 10px;
+    max-width: 90%;
+  }
+  #labubu-toy-container {
+    padding: 15px;
+  }
+  #labubu-toy {
+    max-width: 200px;
+  }
+  #labubu-toy-container::before,
+  #labubu-toy-container::after {
+    font-size: 20px;
+  }
+  .corner-labubu {
+    width: 70px;
+  }
+  .bg-decoration {
+    font-size: 30px;
+  }
+  #bg-bow {
+    top: 10px;
+    left: 10px;
+  }
+  #bg-flower {
+    top: 10px;
+    right: 10px;
+  }
+  #bg-star {
+    bottom: 10px;
+    left: 10px;
+  }
+  #bg-heart {
+    bottom: 10px;
+    right: 10px;
+  }
+}
